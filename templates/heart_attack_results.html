@@ -1,0 +1,71 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+	<h1>Heart Attack Prediction Result</h1>
+	<p>The prediction based on your input data is: <strong>{{ "HIGH RISK" if prediction == 1 else "LOW RISK" }}</strong></p>
+	<p>The probability based on input data is: <strong>{{ probability*100 }} percent to have a heart attack</strong></p>
+	{% if prediction == 0 %}
+		<h4>CONGRATULATIONS! You are at low risk of having a heart attack. Please take good care of yourself.</h4>
+	{% else %}
+    	<h4>YOU ARE AT HIGH RISK OF HAVING A HEART ATTACK. PLEASE FOLLOW DOCTOR'S INSTRUCTIONS.</h4>
+		<h4>There are several steps people can take to reduce their risk of heart attack:</h4>
+		<ol>
+			<li>Maintain a healthy diet: Eating a balanced diet that is low in saturated fats,
+				trans fats, and cholesterol can help lower the risk of heart attack. A diet rich
+				in fruits, vegetables, whole grains, lean proteins, and healthy fats like omega-3
+				fatty acids can help keep the heart healthy.</li><br>
+
+			<li>Exercise regularly: Regular exercise helps maintain a healthy weight and reduces
+				the risk of high blood pressure, high cholesterol, and diabetes, which are all
+				risk factors for heart attack. Aim for at least 30 minutes of moderate-intensity
+				exercise, such as brisk walking, most days of the week.</li><br>
+
+			<li>Quit smoking: Smoking is a major risk factor for heart attack, and quitting
+				smoking can significantly reduce the risk. Seek help from a healthcare provider
+				or smoking cessation program if needed.</li><br>
+
+			<li>Manage stress: Chronic stress can increase the risk of heart attack, so it's
+				important to find ways to manage stress. Some effective stress-management
+				techniques include yoga, meditation, deep breathing exercises, and spending
+				time with loved ones.</li><br>
+
+			<li>Control other health conditions: If you have other health conditions such as
+				high blood pressure, high cholesterol, or diabetes, work with your healthcare
+				provider to manage these conditions effectively. This can help reduce the risk
+				of heart attack.</li><br>
+
+			<li>It's important to consult with a healthcare provider for personalized advice on
+				reducing the risk of heart attack.</li><br>
+		</ol>
+	{% endif %}
+
+	{% if probability > 0.5 %}
+    	<h4>BE CAREFUL! You have a high chance of having a heart attack.</h4>
+		<h4>It is essential to take steps to reduce your risk factors and improve your heart health.
+		Here are some tips and advice to help you:</h4>
+		<ol>
+			<li>Quit smoking: Smoking is a significant risk factor for heart disease, and quitting
+			smoking can help reduce your risk of heart attack.</li><br>
+			<li>Control your blood pressure: High blood pressure is another significant risk factor
+			for heart disease. Work with your doctor to manage your blood pressure and keep it within a healthy range.</li><br>
+			<li>Manage your cholesterol: High levels of LDL cholesterol (also known as "bad" cholesterol)
+			can lead to plaque buildup in your arteries and increase your risk of heart disease. Work
+			with your doctor to manage your cholesterol levels through lifestyle changes and medication, if necessary.</li><br>
+			<li>Maintain a healthy weight: Being overweight or obese increases your risk of heart disease.
+			Eating a healthy diet and exercising regularly can help you maintain a healthy weight.</li><br>
+			<li>Exercise regularly: Regular physical activity can help improve your heart health and reduce
+			your risk of heart disease. Aim for at least 150 minutes of moderate-intensity aerobic exercise per week.</li><br>
+			<li>Eat a heart-healthy diet: A diet rich in fruits, vegetables, whole grains, lean protein, and
+			healthy fats can help reduce your risk of heart disease.</li><br>
+			<li>Manage stress: Chronic stress can increase your risk of heart disease. Find healthy ways to
+			manage stress, such as through exercise, meditation, or spending time with loved ones.</li><br>
+			<li>Take medication as prescribed: If your doctor has prescribed medication to manage your risk
+			factors for heart disease, make sure you take it as directed.</li><br>
+			<li>Remember, it's never too late to make changes to improve your heart health and reduce your
+			risk of heart attack. Speak with your doctor to develop a plan that's right for you.</li><br>
+		</ol>
+	{% endif %}
+<hr>
+<a href="/">go home</a>
+
+{% endblock %}

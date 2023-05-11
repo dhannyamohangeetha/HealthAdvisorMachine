@@ -1,0 +1,327 @@
+﻿PROJECT OVERVIEW
+
+
+The Health Advisor Machine is a machine learning project that focuses on predicting the likelihood of several health conditions, including diabetes, heart attack, liver disease, cancer, depression, Alzheimer's, and “craziness” conditions. The project is a group effort led by three team members, Dhannya Mohan Geetha, Kesha Patel, and Trung Tran.
+
+
+To achieve the project goals, the team utilized various technologies such as Amazon Web Services AWS S3, Amazon DynamoDB, Amazon EC2, Amazon Kubernetes EKS, Python, Kafka, Panda, Pyspark, Flask Web Application, HTML, Bootstrap, Docker, and Kubernetes. The team collected datasets from Kaggle, which contained over 100,000 records and applied machine learning models such as logistic regression, random forest regression, and decision tree models, to determine the best model for predicting the likelihood of each health condition. They selected the best models that have accuracy around 85% and above to apply to their application.
+
+
+The project aims to provide personalized health advice and insights to individuals to help them take proactive steps towards improving their health and well-being. However, the project is only for learning purposes, and individuals should consult their healthcare providers if they have health problems.
+
+
+Overall, the Health Advisor Machine project demonstrates the potential of machine learning in healthcare and how it can provide valuable insights to individuals about their health. The project showcases the power of combining different technologies and skills to create a functional and useful product.
+  
+
+
+
+________________
+
+
+DIABETE_MODELS.PY
+
+
+This Python code trains a machine learning model to predict diabetes using a dataset of patient information. The model is saved as a pickle file and uploaded to Amazon S3 cloud storage for future use.
+
+
+The code starts by importing the necessary libraries including pickle, pandas, matplotlib, seaborn, sklearn, and boto3.
+
+
+The save_to_s3 function is defined to save files to an AWS S3 bucket. The function takes the name of the bucket, the key name for the file, and the data to be saved. If the data is in bytes format, it is uploaded using the put_object method. Otherwise, it is uploaded using the put method.
+
+
+The train_diabetes_model function loads the diabetes prediction dataset from an AWS S3 bucket using the pd.read_csv method. The function then creates a heatmap of the correlations between the different features in the dataset using the sns.heatmap method. The heatmap is saved as a PNG file in memory using plt.savefig method, and then uploaded to an S3 bucket using the save_to_s3 method.
+
+
+The function then preprocesses the dataset by encoding the categorical features using one-hot encoding and concatenating them with the numerical features. The target variable is stored separately in y. The preprocessed data is then split into training and testing sets using the train_test_split method from sklearn.model_selection.
+
+
+The function then creates a random forest classifier model using sklearn.ensemble.RandomForestClassifier. The model is trained on the training data using the fit method and tested on the testing data using the score method. The accuracy of the model is printed to the console.
+
+
+Finally, the trained model is saved as a pickle file using pickle.dump and uploaded to an S3 bucket using the boto3.client method.
+
+
+The main function calls train_diabetes_model function if the script is being run as the main program.
+________________
+
+
+HEART_ATTACK_MODEL.PY
+
+
+The given code defines a Python function train_heart_attack_model() that trains a logistic regression model to predict the occurrence of heart attacks based on a dataset of patients.
+
+
+The first part of the code reads the data from a CSV file hosted on AWS S3 and performs some preprocessing to rename columns and convert data types. It then generates a heatmap plot of the correlation between features in the dataset and saves the plot as a PNG file in memory.
+
+
+The save_to_s3() function is used to upload the PNG file to an S3 bucket with public-read access.
+
+
+The code then splits the dataset into training and testing sets using train_test_split() from Scikit-learn. It trains a logistic regression model on the training set and evaluates its accuracy on the testing set using model.score().
+
+
+Finally, the trained model is saved as a pickle file locally and uploaded to an S3 bucket using the boto3 library.
+
+
+Overall, this code demonstrates how to train a machine learning model on a dataset, evaluate its performance, and save the model and associated artifacts (e.g., plots) to AWS S3.
+________________
+
+
+APP.PY
+
+
+This is a Python Flask web application that consists of three main components:
+
+
+User Interface:
+The user interface is implemented using Flask's template engine, which is based on Jinja2. The application has three web pages: index.html, diabetes.html, and heart_attack.html. These pages are served by the Flask application via the corresponding routes: "/" (index), "/diabetes" (diabetes), and "/heart_attack" (heart_attack).
+
+
+Model Inference:
+The Flask application uses two pre-trained machine learning models to predict the likelihood of a person having diabetes or a heart attack. The models are loaded into memory when the application starts up using the Pickle library. When a user submits the form on the diabetes.html or heart_attack.html page, the form data is processed, and the model is used to generate a prediction. The prediction and its associated probability are then returned to the user via the corresponding results page: "/diabetes_results" (diabetes_results) and "/heart_attack_results" (heart_attack_results).
+
+
+User Feedback Storage:
+User feedback is collected using a form on the feedback.html page. When the user submits the form, the feedback is stored in an AWS DynamoDB table. The boto3 library is used to connect to the DynamoDB service and create a table if it does not already exist.
+
+
+The Flask application has a secret_key set to "TRUNG TRAN", which is used to encrypt session cookies. Additionally, the application uses Flash messages to provide feedback to the user in response to form submissions. A Kafka producer is also used to log user feedback asynchronously to a Kafka topic, which is consumed by another system for further processing.
+
+
+The application also includes several helper functions that are used to process the form data and calculate the body mass index (BMI) of the user. Finally, the application uses the AWS SDK for Python (boto3) to connect to the AWS DynamoDB service to store user feedback. The code checks if the DynamoDB table already exists and creates it if it does not.
+
+
+________________
+
+
+ABOUT.HTML
+
+
+This is a template file that extends a base template called "layout.html" and defines a specific block of content for the body of the page.
+
+
+The main content of the page is a description of "The Health Advisor Machine," a machine learning project that aims to predict the likelihood of various health conditions. The project was created by a team consisting of Dhannya Mohan Geetha, Kesha Patel, and Trung Tran.
+
+
+The page provides an overview of the project's technologies, which include Amazon S3, Amazon DynamoDB, Amazon EC2, Amazon Kubernetes EKS, Python, Panda, Pyspark, Flask Web Application, HTML, Bootstrap, Docker, and Kubernetes.
+
+
+The team gathered datasets from Kaggle containing over 100,000 records and used machine learning models, including logistic regression, random forest regression, and decision tree models, to determine the best model for predicting the likelihood of each health condition. The best models were chosen based on their accuracy, which was around 85% and higher.
+
+
+The Health Advisor Machine project aims to provide personalized health advice and insights to help individuals improve their health and well-being. However, it is important to note that this project is designed for learning purposes only, and individuals should consult their healthcare providers for health problems.
+
+
+The page also includes images of the team members and a disclaimer about the project's limitations.
+
+
+________________
+
+
+CRAZYNESS.HTML
+
+
+This is a web page that allows users to predict their "craziness" based on whether they are a software developer or not. The page extends a base HTML layout and includes a form for the user to input their status as a software developer or not. The form uses a select input with two options, "Yes" and "No", and is required to be filled out before submission. Upon submission, the form data is sent to the "/craziness" route using the HTTP POST method.
+
+
+Below the form, there is a horizontal rule and a heading displaying a message related to the user's predicted craziness. This message is a variable that is passed from the server-side code. Finally, there is another horizontal rule and a link to return to the homepage.
+
+
+Overall, this page is designed to be a fun and entertaining way for users to predict their "craziness" based on a single question about their profession.
+
+
+________________
+
+
+DIABETES.HTML
+
+
+This is a HTML template for a web form used to predict the likelihood of an individual having diabetes. The form collects various demographic and health-related information from the user and submits it to a backend server for processing. The form is built using the Flask framework. The form also includes a link to return to the homepage.
+
+
+This is a web page for a diabetes prediction form. The form allows users to enter various health information including their gender, age, hypertension, heart disease, smoking history, height, weight, HbA1c level, and blood glucose level.
+
+
+Once the user submits the form, the information is sent to a server where it is used to make a prediction about whether the user has diabetes or not, using a Random Forest Regression Model that is based on a dataset of 100,000 records with an accuracy rate of 97%.
+
+
+The form itself is designed using HTML and includes various input fields for the user to enter their information, such as select fields for hypertension, heart disease, and smoking history, and number fields for age, height, weight, HbA1c level, and blood glucose level. The form also includes a submit button for the user to submit their information.
+
+
+This page extends a base layout called "layout.html" and overrides the "body" block to display the diabetes prediction form. At the bottom of the page, there is a link to go back to the home page.
+
+
+
+
+
+
+
+
+
+
+________________
+
+DIABETES_RESULTS.HTML
+
+
+This page is a template for displaying the prediction result of a diabetes model. The template extends a base layout file and includes a block for the body content.
+
+
+The body content of this template includes the prediction result and the probability of being diabetic based on the input data. If the prediction result is negative (i.e., the user is not diabetic), the template displays some general tips to reduce the risk of developing diabetes, including maintaining a healthy weight, eating a balanced diet, avoiding sugary drinks and processed foods, exercising regularly, getting enough sleep, managing stress, and getting regular check-ups.
+
+
+On the other hand, if the prediction result is positive (i.e., the user is diabetic), the template displays a message advising the user to follow the doctor's instructions. Additionally, it provides some general advice for people with or at risk for diabetes, including maintaining a healthy diet, staying physically active, monitoring blood sugar levels, taking medication as prescribed, managing stress, quitting smoking, and getting regular check-ups.
+
+
+At the end of the template, there is a link to return to the home page.
+
+
+Overall, this template provides a clear and concise message to the user about their diabetes prediction and provides practical advice for managing or reducing their risk of developing diabetes.
+________________
+
+
+
+
+FEEDBACK.HTML
+
+
+This is a Feedback Form webpage that allows users to submit feedback on a project. The page is an extension of a layout.html file.
+
+
+The webpage consists of a header that displays the title "Feedback Form", a form that includes the fields "Your Name", "Project Rating", and "Comments", and a submit button. The "Project Rating" field is a dropdown menu that ranges from 1 (bad) to 5 (excellence) with default text "Please select" at the top. Additionally, there is a "Generate Report" button that when clicked, generates a report image and displays it in a new window. Below the form, there is a flash messages section that displays any messages generated by the form submission.
+
+
+To submit the form, users must fill in the required fields and click the "Submit" button. Upon submission, the data is sent to "/feedback" using the "post" method.
+
+
+At the bottom of the page, there is a "go home" link that redirects the user to the homepage.
+________________
+
+
+HEART_ATTACK.HTML
+
+
+This page is a web form for predicting the risk of heart attack based on several factors such as age, sex, chest pain type, blood pressure, cholesterol level, fasting blood sugar, rest ECG, maximum heart rate after exercise, exercise induced angina, ST depression, slope of peak exercise ST segment, number of major vessels, and thalassemia.
+
+
+The form uses a logistic regression model with an accuracy rate of 85% to make the prediction. Users are required to fill out all the fields in the form before submitting it.
+
+
+The page is designed with a header containing the title of the page and a brief description of the model used. The form itself consists of several input fields with corresponding labels and dropdown menus with options for users to select.
+
+
+After submitting the form, users are directed to a separate page where the predicted risk of heart attack is displayed. The page also provides a link to go back to the homepage.
+
+
+Overall, this page is a useful tool for individuals who want to assess their risk of heart attack and take preventative measures to reduce their risk.
+________________
+
+
+HEART_ATTACK_RESULTS.HTML
+
+
+This is a template file for a web application that predicts the risk of having a heart attack based on user input data. The template is written in the Django templating language.
+
+
+The file extends a base layout.html file and contains a block called 'body'. Within this block, the code displays the result of the heart attack prediction, which is either "HIGH RISK" or "LOW RISK," depending on the input data. It also displays the probability of having a heart attack based on the input data.
+
+
+If the prediction is LOW RISK, the code displays a congratulatory message and advises the user to take good care of themselves.
+
+
+If the prediction is HIGH RISK, the code displays a warning message and provides several steps people can take to reduce their risk of having a heart attack. These include maintaining a healthy diet, exercising regularly, quitting smoking, managing stress, controlling other health conditions, and consulting with a healthcare provider for personalized advice.
+
+
+If the probability of having a heart attack is greater than 50%, the code provides additional tips and advice to help reduce the user's risk factors and improve their heart health.
+
+
+The file also includes a link to the homepage of the web application.
+
+
+To use this template file, it needs to be connected to a Django view function that passes in the prediction and probability data. The view function then renders this template with the appropriate data.
+________________
+
+
+INDEX.HTML
+
+
+This is a HTML template file for the Health Advisor Machine website. It extends the layout.html file and defines the body block.
+
+
+The first block of the body block includes a heading h1 element with the text "Health Advisor Machine". This is followed by a p element with the text "Our project is for learning experience, please consult your healthcare providers if you have any health problem" that serves as a disclaimer to the users.
+
+
+Then, the template provides a list of topics for users to select and learn more about their health. This is done using an unordered list ul element. Each list item li has an anchor element, which has an href attribute that specifies the URL for the corresponding topic page. The list items include "Diabetes", "Heart Attack", and "Liver Disease".
+
+
+There are three horizontal rules <hr> elements between the list items. After the "Liver Disease" item, there are three more topics that are listed as "Coming Soon". These topics are "Cancer", "Alzheimer", and "Depression".
+
+
+Another horizontal rule is included before the last list item, which is a link to a feedback form. The link text reads "We Learn, We Listen, We Take Feedback, And We Fix".
+
+
+Overall, this template file provides a simple, yet informative page for users to explore health topics. It also includes a disclaimer and a feedback option to encourage users to seek professional medical advice and provide feedback to improve the website.
+________________
+
+
+LAYOUT.HTML
+
+
+This is the HTML code for a web page called "Health Advisor Machine". The page is built using the Bootstrap 4.5.2 framework and includes a navigation bar at the top, a main content section, and a footer.
+
+
+The navigation bar includes links to four other pages: "The Project", "The Document", "The Team", and "Feedback". Clicking on each link will take the user to the corresponding page.
+
+
+The main content section is divided into two columns, with the left column serving as a communication section and the right column serving as the main content area. The communication section includes three links: "Chat with Pros", "Response to User", and "Feedback". Clicking on the first two links will open new windows for chat communication, while clicking on "Feedback" will take the user to the feedback page.
+
+
+The right column is empty by default, but can be filled with content by using the {% block body %} and {% endblock %} tags.
+
+
+The footer includes information about the creators of the page and their affiliation with Data 4.0 and Zip Code Wilmington.
+
+
+Overall, the Health Advisor Machine is a web application designed to provide health-related advice to users. It includes features for communication and feedback, and can be customized with additional content using the provided tags.
+________________
+
+
+PAGE1.HTML
+
+
+This page is a chat interface that allows users to communicate with a professional using the Kafka messaging system. The page consists of a form where the user can enter a message and submit it to the professional. The messages sent and received are displayed in a list format on the page.
+
+
+The page is designed to refresh every 8 seconds to update the list of messages. The chat interface is implemented using HTML, with some JavaScript to handle the page refreshing, and Flask as the web framework for the backend.
+
+
+To send a message, the user simply enters their message into the text box provided and clicks the "Send" button. The message is then sent to the professional using Kafka, and a confirmation is displayed on the page.
+
+
+The conversation between the user and the professional is displayed in a list format below the message input box. Each message is displayed in a separate list item with the sender and time stamp displayed next to it. The conversation is updated in real-time as new messages are received.
+________________
+PAGE2.HTML
+
+
+This is an HTML page for a chat application where a user can talk to another user using KAFKA messaging system. This particular page is designed for User 2.
+
+
+The page consists of a header, a form for sending messages, and a section to display the conversation. The header includes the title of the page, which is "Talk to User Using KAFKA".
+
+
+The form allows the user to enter a message and submit it to the KAFKA messaging system. The input field has an ID of "message" and a name of "message". Upon clicking the "Send" button, the message is sent to the system using the "send_message2" route.
+
+
+The conversation section displays all the messages exchanged between the users. It consists of an unordered list, which is populated with the messages received from the KAFKA messaging system. The messages are displayed using a loop, where each message is displayed in a separate list item.
+
+
+The page includes a JavaScript function called "refreshPage()", which is used to reload the page every 8 seconds using the setInterval() method. This is done to ensure that the user sees the latest messages in real-time.
+
+
+Overall, this page is a simple interface for a chat application that allows User 2 to send and receive messages using KAFKA.
+________________
+PROJECT.HTML
+
+
+This is a Jinja2 template that extends a base template called layout.html. The block named body is defined in this template and it contains an HTML h1 tag with the text "PROJECT UML" and an image element that displays an image of a project UML diagram. The src attribute of the image tag contains a URL pointing to an image hosted on Amazon S3. The alt attribute provides alternative text for the image, which can be helpful for users who are visually impaired or who have slow internet connections. The height and width attributes set the dimensions of the image. Overall, this page provides a visual representation of the project's UML diagram for the users to understand the architecture and design of the system.

@@ -1,0 +1,55 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+	<h1>Type 2 Diabetes Prediction Result</h1>
+	<p>The prediction based on your  input data is: <strong>{{ "DIABETIC" if prediction == 1 else "NOT DIABETIC" }}</strong></p>
+	<p>The probability based on input data is: <strong>{{ probability*100 }} percent to be diabetic</strong></p>
+	{% if prediction == 0 %}
+		<h4>CONGRATULATIONS! You are diabetic free. Please take good care of yourself.</h4>
+		<h4>Here are some general tips to reduce the risk of developing diabetes:</h4>
+		<ol>
+			<li>Maintain a healthy weight: Obesity is a significant risk factor for developing diabetes.
+			Eating a balanced diet and engaging in regular physical activity can help maintain a healthy weight.</li><br>
+			<li>Eat a balanced diet: Eating a healthy and balanced diet can help prevent the development of diabetes.
+			A diet rich in whole grains, fruits, vegetables, lean proteins, and healthy fats can help lower the
+			risk of diabetes.</li><br>
+			<li>Avoid sugary drinks and processed foods: Consuming sugary drinks and processed foods can increase the
+			risk of developing diabetes. These types of foods can cause blood sugar levels to spike, leading to
+			insulin resistance.</li><br>
+			<li>Exercise regularly: Engaging in regular physical activity can help lower the risk of developing diabetes.
+			Exercise can help lower blood sugar levels and improve insulin sensitivity.</li><br>
+			<li>Get enough sleep: Lack of sleep can disrupt hormone levels and lead to insulin resistance, increasing
+			the risk of developing diabetes. Aim for 7-9 hours of sleep per night.</li><br>
+			<li>Manage stress: Stress can lead to elevated blood sugar levels and insulin resistance. Engage in
+			stress-reducing activities such as meditation, yoga, or deep breathing exercises.</li><br>
+			<li>Get regular check-ups: Regular check-ups with your healthcare provider can help identify any risk
+			factors for developing diabetes and allow for early intervention and treatment.></li><br>
+		</ol>
+	{% else %}
+    	<h4>YOU ARE DIABETIC. PLEASE FOLLOW DOCTOR'S INSTRUCTIONS.</h4>
+	{% endif %}
+
+	{% if probability > 0.5 %}
+    	<h4>BE CAREFUL! You have a high chance of getting diabetes.</h4>
+		<h4>Here are some general pieces of advice for people with or at risk for diabetes:</h4>
+		<ol>
+			<li>Maintain a healthy diet: Eating a balanced diet that includes plenty of fruits, vegetables,
+			whole grains, lean proteins, and healthy fats can help control blood sugar levels and manage weight.</li><br>
+			<li>Stay physically active: Regular exercise can help improve insulin sensitivity and regulate blood
+			sugar levels. Aim for at least 150 minutes of moderate-intensity activity each week, such as brisk
+			walking, cycling, or swimming.</li><br>
+			<li>Monitor blood sugar levels: People with diabetes should regularly check their blood sugar levels
+			as recommended by their healthcare provider, and adjust their medication or lifestyle as needed.</li><br>
+			<li>Take medication as prescribed: If prescribed medication for diabetes, it's important to take it
+			as directed by your healthcare provider to help manage blood sugar levels and prevent complications.</li><br>
+			<li>Manage stress: Stress can raise blood sugar levels, so finding ways to manage stress such as exercise,
+			meditation, or talking to a mental health professional can be helpful.</li><br>
+			<li>Quit smoking: Smoking can increase the risk of developing diabetes and can also make it harder to
+			manage blood sugar levels.</li><br>
+			<li>Get regular check-ups: Regular check-ups with a healthcare provider can help monitor blood sugar
+			levels, blood pressure, cholesterol levels, and other health factors related to diabetes.</li><br>
+		</ol>
+	{% endif %}
+<hr>
+<a href="/">go home</a>
+{% endblock %}

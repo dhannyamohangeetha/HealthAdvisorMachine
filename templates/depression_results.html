@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+	<h1>Depression Prediction Result</h1>
+	<p>The prediction based on your  input data is: <strong>{{ "DEPRESSED" if prediction == 1 else "NO DEPRESSION" }}</strong></p>
+	<p>The probability based on input data is: <strong>{{ probability*100 }} percent to be depressed</strong></p>
+	{% if prediction == 0 %}
+		<h4>CONGRATULATIONS! You are not Depressed. Live a happy life.</h4>
+		<h4>Here are some general tips </h4>
+
+	{% else %}
+    	<h4>YOU ARE DEPRESSED. PLEASE FOLLOW DOCTOR'S INSTRUCTIONS.</h4>
+	{% endif %}
+
+	{% if probability > 0.5 %}
+    	<h4>BE CAREFUL! You have a high chance of getting depressed.</h4>
+		<h4>Here are some general pieces of advice </h4>
+
+	{% endif %}
+<hr>
+<a href="/">go home</a>
+{% endblock %}

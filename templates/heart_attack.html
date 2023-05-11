@@ -1,0 +1,77 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+	<h1>Heart Attack Prediction Form</h1>
+	<p><i>We used Logistic Regression Model, accuracy rate 85%</i></p>
+	<form action="/heart_attack_results" method="post">
+		<label for="age">Age:</label>
+		<input type="number" id="age" name="age" min="0" max="120" required>
+		<label for="sex">Sex:</label>
+		<select id="sex" name="sex" required>
+			<option value="">Please select</option>
+			<option value="0">Female</option>
+			<option value="1">Male</option>
+		</select>
+		<label for="cp">Chest Pain Type:</label>
+		<select id="cp" name="cp" required>
+			<option value="">Please select</option>
+			<option value="1">Typical Angina (less than 10 minutes)</option>
+			<option value="2">Atypical Angina (longer than Typical)</option>
+			<option value="3">Non-anginal Pain (other symptoms)</option>
+			<option value="0">Asymptomatic (no symptom)</option>
+		</select>
+		<label for="trtbps">Resting Blood Pressure (in mm Hg):</label>
+		<input type="number" id="trtbps" name="trtbps" min="0" max="250" value="120" required>
+		<label for="chol">Total Cholesterol:</label>
+		<input type="number" id="chol" name="chol" min="0" max="600" value="150" required>
+		<label for="fbs">Fasting Blood Sugar:</label>
+		<select id="fbs" name="fbs" required>
+			<option value="">Please select</option>
+			<option value="0">Lower than 120mg/dl</option>
+			<option value="1">Greater than or equal to 120mg/dl</option>
+		</select>
+		<label for="restecg">Rest ECG:</label>
+		<select id="restecg" name="restecg" required>
+			<option value="">Please select</option>
+			<option value="1">Normal (or don't know)</option>
+			<option value="2">ST-T wave abnormality</option>
+			<option value="0">Left ventricular hypertrophy</option>
+		</select>
+		<label for="thalachh">Max Heart Rate (after excercise):</label>
+		<input type ="number" id="thalachh" name="thalachh" min="0" max="250" value="190" required>
+		<label for="exng">Exercise Induced Angina (chest pain while exercise) :</label>
+		<select id="exng" name="exng" required>
+			<option value="">Please select</option>
+			<option value="0">No</option>
+			<option value="1">Yes</option>
+		</select>
+		<label for="oldpeak">ST Depression:</label>
+		<input type="number" id="oldpeak" name="oldpeak" min="0" max="10" step="0.1" value="0.1"required>
+		<label for="slp">Slope of Peak Exercise ST Segment:</label>
+		<select id="slp" name="slp" required>
+			<option value="">Please select</option>
+			<option value="2">Upsloping (low risk)</option>
+			<option value="1">Flat (select this if normal or don't know)</option>
+			<option value="0">Downsloping (high risk)</option>
+		</select>
+		<label for="caa">Number of Major Vessels:</label>
+		<select id="caa" name="caa" required>
+			<option value="">Please select</option>
+			<option value="0">0 (normal)</option>
+            <option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4 (bad)</option>
+    	</select>
+		<label for="thall">Thalassemia (inherited blood disorders):</label>
+		<select id="thall" name="thall" required>
+			<option value="">Please select</option>
+            <option value="1">Fixed Defect</option>
+			<option value="2">Normal</option>
+			<option value="3">Reversable Defect</option>
+    	</select>
+        <input type="submit" value="Submit">
+	</form>
+	<hr>
+	<a href="/">go home</a>
+{% endblock %}

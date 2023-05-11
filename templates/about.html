@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+    <h1>The Health Advisor Machine</h1>
+    <p>The Health Advisor Machine is a group project in machine learning that
+        aims to predict the likelihood of several health conditions, including diabetes,
+        heart attack, cancer, depression, Alzheimer's, and “craziness” conditions.
+        The team members include Dhannya Mohan Geetha, Kesha Patel, and Trung Tran.
+    </p>
+    <div>
+		<img src="https://diabetesprojectfinal.s3.amazonaws.com/team_photo/Kesha_Patel.jpeg" alt="Kesha Patel" height="200" width="200">
+        <img src="https://diabetesprojectfinal.s3.amazonaws.com/team_photo/Trung+Tran.jpg" alt="Trung Tran" height="200" width="200">
+        <img src="https://diabetesprojectfinal.s3.amazonaws.com/team_photo/DhannyaMohan_Geetha.jpg" alt="Dhannya Mohan Geetha" height="200" width="200">
+	</div>
+    <p>To accomplish the project goals, the team utilized several technologies such as Amazon S3,
+        Amazon DynamoDB,Amazon EC2, Amazon Kubernetes EKS, Python, Panda, Pyspark, Flask Web Application,
+        HTML, Bootstrap, Docker, and Kubernetes.
+    </p>
+    <p>The team gathered datasets from Kaggle, which contained over 100,000 records.
+        They then applied machine learning models, including logistic regression,
+        random forest regression, and decision tree models, to determine the best model for
+        predicting the likelihood of each health condition. We chose the best models that
+        have accuracy around 85% and up to apply into our application.
+    </p>
+    <p>The Health Advisor Machine project aims to provide individuals with personalized
+        health advice and insights to help them take proactive steps to improve their
+        health and well-being. However, this project is designed for learning experience only.
+        Please consult your healthcare providers if you have health problems.
+    </p>
+
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+    <h1>Predict your craziness</h1>
+    <p><i>Here is some fun fact!</i></p>
+    <form action='/craziness' method="post">
+        <label>Are you a software developer?</label>
+        <select id="developer" name="developer" required>
+            <option value="">Please select</option>
+            <option value="0">Yes</option>
+            <option value="1">No</option>
+        </select>
+        <button type="submit">Submit</button>
+    </form>
+    <hr>
+    <h1><strong>{{ message }}</strong></h1>
+    <hr>
+    <a href="/">go home</a>
+{% endblock %}

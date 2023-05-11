@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>User 1</title>
+    <script>
+      function refreshPage() {
+        location.reload();
+      }
+      setInterval(refreshPage, 8000); // Refresh every 8 seconds
+    </script>
+  </head>
+  <body>
+    <h1>Talk to Professional Using KAFKA</h1>
+    <form action="/send_message1" method="POST" target="_self">
+      <label for="message">Enter a message:</label>
+      <input type="text" id="message" name="message"><br><br>
+      <input type="submit" value="Send" onclick="clearInputField()">
+    </form>
+    <h3>Conversation</h3>
+    <ul>
+      {{message}}
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
