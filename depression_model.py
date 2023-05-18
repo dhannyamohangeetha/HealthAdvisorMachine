@@ -1,5 +1,3 @@
-import pickle
-
 import boto3
 from pyspark.sql import SparkSession
 from pyspark.ml.classification import LogisticRegression, DecisionTreeClassifier, RandomForestClassifier, GBTClassifier

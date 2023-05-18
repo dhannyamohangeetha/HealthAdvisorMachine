@@ -7,6 +7,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 import boto3
 
+
 # Method to save stuffs on AWS S3
 def save_to_s3(bucket_name, key_name, data):
     s3 = boto3.resource('s3', region_name='us-east-1')
@@ -18,7 +19,6 @@ def save_to_s3(bucket_name, key_name, data):
 
 
 def train_heart_attack_model():
-
     df = pd.read_csv('https://diabetesprojectfinal.s3.amazonaws.com/dataset/heart.csv')
     new_column_names = {
         'age': 'Age',
@@ -38,8 +38,8 @@ def train_heart_attack_model():
     }
     df = df.rename(columns=new_column_names)
 
-    plt.figure(figsize=(10,5))
-    sns.heatmap(df.corr(),annot=True,cmap='coolwarm')
+    plt.figure(figsize=(10, 5))
+    sns.heatmap(df.corr(), annot=True, cmap='coolwarm')
 
     # Save the plot as a PNG file in memory
     png_buffer = BytesIO()
@@ -51,9 +51,7 @@ def train_heart_attack_model():
     png_file = png_buffer.read()
     save_to_s3('diabetesprojectfinal', object_key, png_file)
 
-    # Close the plot to free up memory
     plt.close()
-
 
     X = df.drop('Target', axis=1)
     y = df['Target']
